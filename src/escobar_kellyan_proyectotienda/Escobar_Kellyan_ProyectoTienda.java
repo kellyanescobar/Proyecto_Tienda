@@ -1,6 +1,7 @@
 package escobar_kellyan_proyectotienda;
 import java.text.DecimalFormat;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Escobar_Kellyan_ProyectoTienda {
 
@@ -24,6 +25,7 @@ public class Escobar_Kellyan_ProyectoTienda {
      double ganancia=0;
      
    while (menu!=6){
+       try{
        System.out.println("----------------------------------------------");
        System.out.println("--------------- Menu Principal ---------------");
        System.out.println("1 --------------- Abrir Caja -----------------");
@@ -35,21 +37,31 @@ public class Escobar_Kellyan_ProyectoTienda {
        System.out.println(" --------- Elija una opcion del 1 al 6 -------");
        System.out.println("----------------------------------------------");
        menu=lea.nextInt();
+        } catch (InputMismatchException e) {
+        System.out.println("Error: Por favor ingrese un numero valido.");
+        lea.next(); // Limpia la entrada
+    }
        switch (menu){
            //Se abrira la caja
            case 1:  
                if (cajacerrada==1){
                    System.out.println("Se abrio la caja correctamente.");
                    System.out.println("Ingrese la cantidad de efectivo para abrir la caja:");
+                   try{
                     double dinero=lea.nextDouble();
                     cajadinero+=dinero;
                    System.out.println("En caja hay: "+cajadinero);
                     abrircaja=1;
                     cajacerrada=1;
+                     } catch (InputMismatchException e) {
+                       System.out.println("Error: debe ingresar un numero");
+                       lea.next(); // Limpia la entrada
+    }
                }else {                 
                     if (abrircaja==0){
                 System.out.println("Se abrio la caja correctamente.");
                 System.out.println("Ingrese la cantidad de efectivo extra:");
+                try{
                 double dinero=lea.nextDouble();
                 cajadinero+=dinero;
                 System.out.println("En caja hay: "+cajadinero);
@@ -60,15 +72,21 @@ public class Escobar_Kellyan_ProyectoTienda {
                     dinero=lea.nextDouble();
                 }  
                  abrircaja=1;
+                  } catch (InputMismatchException e) {
+                    System.out.println("Error: debe de ingresar un numero");
+                    lea.next(); // Limpiar
+    }
             }              
                  }
-                    break;           
+                    break;  
+                    
+           //ventas
            case 2:
                if (abrircaja==0){
                    System.out.println("porfavor abrir caja antes de hacer las ventas");
                } else {
     int salirventas=0,cantidad=0,salirusuario=0; 
-    facturaazucar=0;
+     facturaazucar=0;
      facturamaiz=0;    
      facturaavena=0;
      facturatrigo=0;
@@ -85,6 +103,8 @@ public class Escobar_Kellyan_ProyectoTienda {
                System.out.println("Ingrese el tipo de usuario (A - B - C) ");
                System.out.println("--------------------------------------------");
                String usuario=lea.next().toUpperCase(); 
+              
+              
                switch (usuario){
                    case "A":                       
                        while(salirusuario==0){
@@ -300,9 +320,9 @@ public class Escobar_Kellyan_ProyectoTienda {
                // salida pantalla (Factura)
                                   // salida pantalla (Factura)
                                    System.out.println("------------- Factura --------------");
-                   System.out.println("|Cantidad en kilogramo | Nombre del Producto | Precio Unitario | Subtotal|"); 
+                   System.out.println("  |Cantidad en kilogramo | Nombre del Producto | Precio Unitario | Subtotal|"); 
                if (facturaazucar>=1){                    
-                    System.out.println("   | "+facturaazucar+"kg     | "+"| Azucar     |"+"|     30  |"+(30*facturaazucar)+"|");  
+                    System.out.println("  | "+facturaazucar+"kg     | "+"| Azucar     |"+"|     30  |"+(30*facturaazucar)+"|");  
                } 
                if (facturaavena>=1){
                       System.out.println("  | "+facturaavena+"kg     |"+"| Avena       |"+"|     25  |"+(25*facturaavena)+"|"); 
@@ -324,6 +344,8 @@ public class Escobar_Kellyan_ProyectoTienda {
                    }  
                }              
                break;
+               
+           // compras   
            case 3:
                if (abrircaja==0){
                    System.out.println("Porfavor abrir caja antes de hacer las compras");
@@ -410,7 +432,7 @@ case "B":
             cajadinero-=pagoproveedor;
             System.out.println("El costo final de la compra fue: " + pagoproveedor);
             System.out.println("El Saldo en caja es: " + cajadinero);
-            System.out.println("Transacción completada con exito");
+            System.out.println("Transaccion completada con exito");
         } else {
             System.out.println("No se puede pagar la compra");
         }

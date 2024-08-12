@@ -24,6 +24,7 @@ public class Escobar_Kellyan_ProyectoTienda {
      double ganancia=0;
      
    while (menu!=6){
+       System.out.println("----------------------------------------------");
        System.out.println("--------------- Menu Principal ---------------");
        System.out.println("1 --------------- Abrir Caja -----------------");
        System.out.println("2 ----------------- Ventas -------------------");
@@ -316,7 +317,7 @@ public class Escobar_Kellyan_ProyectoTienda {
                System.out.println("-------------------------------------------------------------------------------- ");
                System.out.println(                                                     "|El Subtotal es: "+subtotal);
                System.out.println(                                                     "|El Descuento es: "+descuento);
-               System.out.println(                                                     "|El impuesto es: "+num.format(impuesto)+":%"+0.07*100);
+               System.out.println(                                                     "|El impuesto es: "+num.format(impuesto)+" 7%");
                System.out.println(                                                     "|El total a pagar es: "+num.format(totalpagar));
                System.out.println(                                                     "|Saldo Actual en Caja es: "+cajadinero);
                contadorventas++;               
@@ -606,27 +607,32 @@ case "C":
                   System.out.println("Ingrese la cantidad de efectivo a depositar en el banco (solo se puede el 60%) :");
                 double deposito=lea.nextDouble();
                 double dineromax=0.6*cajadinero;
-                if(deposito>dineromax ){
+                
+                //usar el while en vez de if
+                while (deposito>dineromax ){
                     System.out.println("La cantidad maxima a guardar en el banco es: "+dineromax);
-                    System.out.println("Ingrese una cantidad válida.");
+                    System.out.println("Ingrese una cantidad valida.");
                     System.out.println("Ingrese la cantidad de efectivo a depositar en el banco (solo se puede el 60%) :");
                    deposito=lea.nextDouble();
-                 if (deposito>=0){
+                }
+                 while (deposito<0){
                      System.out.println("Escribir porfavor numeros positivos");
+                     System.out.println("Ingrese la cantidad de efectivo a depositar en el banco(Solo se puede el 60%):");
+                     deposito=lea.nextDouble();
                  }
-                } else {
+                
                     double dinerosobrante=cajadinero-deposito;
                     cajadinero=(int) dinerosobrante;
                     System.out.println("La cantidad de efectivo sobrante en caja es: "+dinerosobrante);
-                    System.out.println("Caja cerrada.No se pueden realizar más ventas o compras."); 
+                    System.out.println("Caja cerrada.No se pueden realizar mas ventas o compras."); 
                     contadorventas=0; 
                     abrircaja=0;
-               }
+                //termina
                }
                break;
            case 6:   
                System.out.println("Gracias por su Visita");
-               System.out.println("\n Salio del programa");
+               System.out.println(" Salio del programa");
         }
        }
       }
